@@ -1,5 +1,5 @@
 //객체리터럴 표현식
-var person = {
+let person = {
   name: 'LeeJoungWoo',
   //여기서 함수는 함수라 부르지 않고 메서드라 부른다
   sayhello: function () {
