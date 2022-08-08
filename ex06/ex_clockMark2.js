@@ -14,7 +14,7 @@ const abstractClockTime = date => ({
 
 const civilianHours = clockTime => ({
   ...clockTime,
-  hours: clockTime.hours > 12 ? clockTime.hours -12 : clockTime.hours
+  hours: clockTime.hours > 12 ? clockTime.hours - 12 : clockTime.hours
 });
 
 const appendAMPM = clockTime => ({
