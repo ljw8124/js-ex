@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>get_retrieve</title>
+</head>
+<body>
+  <pre></pre>
+  <script>
+    //XMLHttpRequest 객체 생성
+    const xhr = new XMLHttpRequest();
+
+    //HTTP 요청 초기화
+    //todos 리소스에서 id를 이용하여 특정 todos 취득(retrieve)
+    xhr.open("GET", "/todos/1");
+
+    //HTTP 요청 전송
+    xhr.send();
+
+    //load 이벤트 완료후 발생
+    xhr.onload = () => {
+      //status 프로퍼티 값이 200이면 정상적으로 응답된 상태
+      if(xhr.status === 200) {
+        document.querySelector('pre').textContent = xhr.response;
+      } else {
+        console.error("Error", xhr.status, xhr.statusText);
+      }
+    }
+  </script>
+</body>
+</html>
