@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>promise_get_example</title>
+</head>
+<body>
+  <script>
+    //생성 직후의 promise 는 pending 상태이다
+    //성공 시 fulfilled 로 상태가 변경되고
+    //실패 시 rejected 로 상태가 변경된다
+    const promiseGet = url => {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+
+        xhr.onload = () => {
+          if(xhr.status === 200) {
+            resolve(JSON.parse(xhr.response));  //성공적으로 응답이 나올시
+          } else {
+            reject(new Error(xhr.status));  //에러 처리를 위한 방어코딩
+          }
+        }
+      })
+    }
+
+    promiseGet('https://jsonplaceholder.typicode.com/posts/1');
+  </script>
+</body>
+</html>

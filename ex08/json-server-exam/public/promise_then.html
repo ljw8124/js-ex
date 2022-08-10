@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>promise_then_example</title>
+</head>
+<body>
+  <script>
+    //프로미스의 후석 처리 메서드 .then .catch .finally
+    //fulfilled
+    new Promise(resolve => resolve('fulfilled'))
+      .then(v => console.log(v), e => console.error(e));
+
+    //rejected 의 경우에는 catch 를 이용하여 반환할 수도 있는데
+    //이 때 then 과 같이 똑같이 동작한다
+    new Promise((_, reject) => reject(new Error('rejected')))
+      // .then(v => console.log(v), e => console.error(e));
+      .catch(e => console.log(e))
+
+    //finally 는 프로미스의 성공여부와 관계 없이 한번만 호출된다
+    //즉 finally 또한 then/catch 와 마찬가지로 언제나 프로미스를 반환한다.
+
+    //프로미스를 이용한 비동기 함수 get 을 사용하여 후속처리 구현
+    const promiseGet = url => {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+
+        xhr.onload = () => {
+          if(xhr.status === 200) {
+            resolve(JSON.parse(xhr.response));
+          } else {
+            reject(new Error(xhr.status));
+          }
+        };
+      });
+    };
+
+    promiseGet('https://jsonplaceholder.typicode.com/posts/1')
+      .then(res => console.log(res))        //성공시 호출
+      .catch(err => console.error(err))     //실패시 호출
+      .finally(() => console.log('Bye!'));  //성공/실패 둘다 호출됨
+
+  </script>
+</body>
+</html>
