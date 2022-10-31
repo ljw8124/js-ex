@@ -33,12 +33,13 @@ class PerformanceCalculator {
   // }
 
   get volumeCredits() {
-    let result = 0;
-
-    result += Math.max(this.performance.audience - 30, 0);
-    if("comedy" === this.play.type) result += Math.floor(this.performance.audience / 5);
-
-    return result;
+    // let result = 0;
+    //
+    // result += Math.max(this.performance.audience - 30, 0);
+    // if("comedy" === this.play.type) result += Math.floor(this.performance.audience / 5);
+    //
+    // return result;
+    return Math.max(this.performance.audience - 30, 0);
   }
 }
 
@@ -53,6 +54,7 @@ class TragedyCalculator extends PerformanceCalculator {
 }
 
 class ComedyCalculator extends PerformanceCalculator {
+
   get amount() {
     let result = 30000;
     if(this.performance.audience > 20) {
@@ -60,6 +62,10 @@ class ComedyCalculator extends PerformanceCalculator {
     }
     result += 300 * this.performance.audience;
     return result;
+  }
+
+  get volumeCredits() {
+    return super.volumeCredits + Math.floor(this.performance.audience / 5);
   }
 }
 
@@ -105,47 +111,23 @@ export default function createStatementData(invoice, plays) {
     return plays[aPerformance.playID];
   }
 
-  //PerformanceCalculator class 내 함수로 이동
-
-  // function amountFor(aPerformance) {
-  //     return new PerformanceCalculator(aPerformance, playFor(aPerformance).amount);
-  //
-  // }
-
-  // function volumeCreditsFor(perf) {
-  //
-  //   let result = 0;
-  //
-  //   result += Math.max(perf.audience - 30, 0);
-  //   if("comedy" === perf.play.type) result += Math.floor(perf.audience / 5);
-  //
-  //   return result;
-  // }
-
   function totalAmount(data) {
 
-    // let result = 0;
-    // for(let perf of data.performances) {
-    //   result += perf.amount;
-    // }
-    // return result;
 
-    //for문을 파이프라인으로 변경
     return data.performances
     .reduce((total, p) => total + p.amount, 0);
   }
 
   function totalVolumeCredits(data) {
 
-    // let result = 0;
-    // for(let perf of data.performances) {
-    //   result += perf.volumeCredits;
-    // }
-    // return result;
-
-
     return data.performances
     .reduce((total, p) => total + p.volumeCredits, 0);  // 이 때 0 은 initialValue
   }
 
 }
+
+// 이번 리팩토링으로 코드의 양을 늘었지만, 연극 장르별 계산 코드들을 함께 묶어뒀다.
+// 앞으로도 이런 식으로 수정을 할 것 같은 부분이 존재한다면 명확하게 분리하는 것이 중요하다
+// 이번 예제를 통해 적용한 것 -> 1. 함수 추출하기 2. 변수 인라인하기 3. 함수 옮기기 4.조건부 로직을 다형성으로 바꾸기 5. 단계 쪼개기 6. 다형성 표현하기
+
+// 좋은 코드를 가늠하는 방법은 '얼마나 수정하기 편한가' 이다.
