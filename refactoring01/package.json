@@ -1,0 +1,17 @@
+{
+  "name": "refactoring01",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "mocha utils.spec.js -r @babel/register"
+  },
+  "main": "testSample_ex01.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "mocha": "^10.1.0"
+  },
+  "dependencies": {
+    "assert": "^2.0.0"
+  }
+}
