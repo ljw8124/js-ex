@@ -167,7 +167,79 @@ describe('province2', () => {
   // 위 코드에서는 it 에서 두가지 사항을 검증하고 있는데,
   // 일반적으로는 it 하나당 하나의 사항을 검증하는 것이 좋음
   // because, 앞 쪽 검증을 통과하지 않으면 나머지 검증은 실행되지도 않고 실패하기 때문이다.
+  
+  // 숫자형이라면 0 일 때 검사
+  it('zero demand', () => { // 수요가 없는 경우
+    asia.demand = 0;
+    expect(asia.shortfall).equal(-25);
+    expect(asia.profit).equal(0);
+  });
+  
+  // 수요가 마이너스인 경우가 있을까?
+  // 테스트를 진행하다보면 이러한 생각이 드는 경우가 생길 것이다.
+  // 이처럼 특이사항에 대해서 어떻게 처리하는게 좋을지 생각해볼 수 있다.
+  it('negative demand', () => { // 수요가 마이너스인 경우
+    asia.demand = -1;
+    expect(asia.shortfall).equal(-26);
+    expect(asia.profit).equal(-10);
+  });
+  // 문제가 생길 가능성이 있는 경계 조건을 생각해보고 그 부분을 집중적으로 테스트하자
+  
+  it('empty string demand', () => { // 수요 입력란이 비어있는 경우
+    asia.demand = "";
+    expect(asia.shortfall).NaN;
+    expect(asia.profit).NaN;
+  });
+  
 });
+
+// 컬렉션이 비었을 때 어떤 일이 일어나는지 점검하는 테스트
+describe('no producers', () => {  // 생산자가 없다
+  let noProducers;
+  beforeEach(() => {
+    const data = {
+      name: "No producers",
+      producers: [],
+      demand: 30,
+      price: 20
+    };
+    noProducers = new Province(data);
+  });
+  it('shortfall', () => {
+    expect(noProducers.shortfall).equal(30);
+  });
+  it('profit', () => {
+    expect(noProducers.profit).equal(0);
+  });
+  
+});
+
+// 어차피 모든 버그를 잡아낼 수 없다고 생각하여 테스트를 작성하지 않는다면
+// 대다수의 버그를 잡을 수 있는 기회를 날리는 셈이다
+describe('string for producers', () => {
+  it('', () => {
+    const data = {
+      name: "String producers",
+      producers: "",
+      demand: 30,
+      price: 20
+    };
+    const prov = new Province(data);
+    expect(prov.shortfall).equal(0);
+  });
+  // TypeError: doc.producers.forEach is not a function
+  // at new Province (testSample_ex01.js:11:19)
+  // at Context.<anonymous> (testSample_ex01.js:225:18)
+  //   at processImmediate (node:internal/timers:466:21)
+});
+
+// 테스트에도 수확 체감 법칙이 적용된다
+// 테스트를 너무 빡세게 작성하면 오히려 의욕이 떨어져 본 코딩에 부정적인 영향을 미칠 수 있다
+// 그러므로 테스트 코딩은 위험부분에 집중적으로 작성하는 것이 좋다
+
+// 버그리포트를 받으면 가장 먼저 그 버그를 드러내는 단위 테스트부터 작성하자
+
+
 
 
 
