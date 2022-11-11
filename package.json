@@ -1,0 +1,25 @@
+{
+  "name": "js-ex",
+  "version": "1.0.0",
+  "description": "react를 위한 JS ES6 관련과 복습</br> Refactoring 연습",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ljw8124/js-ex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ljw8124/js-ex/issues"
+  },
+  "homepage": "https://github.com/ljw8124/js-ex#readme",
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.1.0"
+  }
+
+}
