@@ -33,7 +33,7 @@ function distanceTravelled(scenario, time) {
 // 함수나 파일에서 특정 심벌이 쓰인 위치를 시각적으로 강조해주는 코드 편집기를 사용하면 변수의 쓰임을 분석하는 데 도움이 된다.
 
 // 변수에 새로운 이름을 지어주고, 선언 시 const 로 선언하여 불변으로 선언한다.
-// 그리고 모든 참조를 새로운 이름으로 바구고, 두번 쨰 대입시 다시 선언한다.
+// 그리고 모든 참조를 새로운 이름으로 바구고, 두번 째 대입시 다시 선언한다.
 
 function distanceTravelled(scenario, time) {
   let result;
