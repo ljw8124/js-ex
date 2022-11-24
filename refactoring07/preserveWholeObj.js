@@ -51,7 +51,3 @@ function xxNEWwithRange(aPlan, tempRange) {
   const isWithinRange = aPlan.withinRange(low, high);
   return isWithinRange;
 }
-
-
-
-
