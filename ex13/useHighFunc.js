@@ -5,6 +5,10 @@ const getCurrentTime=  () => new Date();
 const clear = () => console.clear();
 const log = message => console.log(message);
 
+const compose = (...fns) => (arg) =>
+    fns.reduce((compose, f) => f(compose), arg);
+
+
 // 데이터 변환 함수
 const abstractClockTime = date => ({
   hours: date.getHours(),
