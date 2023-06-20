@@ -6,12 +6,13 @@ const rollingView = () => {
     const items = targetView.getItems();
     const itemCount = items.length;
     
+    const itemParentEle = items[0].parentElement;
+    
     let idx = 0;
     const rollingSpeed = 400;
     
     // 스파이더젠 내장함수 포함코드
     const interval = setInterval(function() {
-        let moveItem = targetView.getItem(idx);
         
         itemParentEle.style.transitionDuration = rollingSpeed + 'ms';
         itemParentEle.style.marginTop = -1 * itemHeight + 'px';
