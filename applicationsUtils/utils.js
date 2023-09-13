@@ -29,3 +29,16 @@ const rollingView = () => {
         
     }, 1000);
 }
+
+// 숫자 3자리 수마다 콤마추가 정규식(금액 input)
+Utils.onlyNumberWithComma = function(str) {
+
+	if(!str) {
+		console.log('onlyNumberWithComma error => 전달된 값이 존재하지 않습니다.');
+		return 0;
+	}
+	
+	if(typeof str !== 'string') str += '';
+	
+	return str.replace(/[^\d]+/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+};
