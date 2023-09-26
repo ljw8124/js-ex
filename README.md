@@ -5,11 +5,3 @@ Refactoring 연습
 node 사용시 npm install 필수
 
 
-특수문자 점검 정규식
-let reg = /[^\w\sㄱ-힣()0-9 ]/g;
-reg.test('점검할 문자열');
-
-
-3자리마다 comma 정규식
-const str = '숫자문자열'
-str.replace(/[^\d]+/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')
