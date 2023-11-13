@@ -42,3 +42,19 @@ Utils.onlyNumberWithComma = function(str) {
 	
 	return str.replace(/[^\d]+/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 };
+
+// 오른쪽 클릭 인식 이벤트
+function addRightClickEvt() {
+	this.startBtn.element.addEventListener('mousedown', (e) => {
+		e = e || window.event;
+		console.log('default', e.which);	// 3
+		console.log('opera, IE',e.button);	// 2
+		
+	});
+
+	// 오른쪽 클릭시 디폴트 이벤트 중지
+	this.startBtn.element.addEventListener('contextmenu', function(e) {
+		e.preventDefault();
+	});
+	
+};
