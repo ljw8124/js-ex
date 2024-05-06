@@ -10,3 +10,5 @@ const addCommaReg = (regText/*숫자문자열*/) => {
   str.replace(/[^\d]+/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 };
 
+// 영문, 숫자만 받는 정규식
+const regExp = /^[A-Za-z0-9]*$/;
