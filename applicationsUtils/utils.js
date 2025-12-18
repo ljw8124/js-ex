@@ -72,3 +72,6 @@ const b = calculate([1, 2, 3], [4, 5, 6], 2);
 const c = calculate('apples', 'and oranged ', 3);
 
 // 주로 파이썬에서 사용함
+
+// Object 값 접근시 에러 방지법
+const value = dataObj?.key; // dataObj 가 null 이 아니라면 key 값으로 할당
